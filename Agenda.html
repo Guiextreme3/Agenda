@@ -64,6 +64,38 @@
         .day-column {
             scroll-snap-align: start;
         }
+        /* Table styling for Grade Targets */
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .grade-table th, .grade-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .grade-table th {
+            background-color: #edf2f7;
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .grade-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .grade-table tbody tr:hover {
+            background-color: #f0f4f8;
+        }
+        .grade-table td:nth-child(2) { /* Nota column */
+            white-space: nowrap;
+            width: 6rem; /* Fixed width for better alignment */
+        }
+        .grade-table td:nth-child(3) { /* Observação column */
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -74,13 +106,13 @@
         2. All Key Performance Indicators (KPIs): Display all critical deadlines with countdowns.
         3. Timeline: Provide a clear chronological list of all major academic commitments with countdowns and priority color coding.
         4. Weekly Planner: Detailed, week-by-week breakdown of daily schedules, including classes, suggested study times, flexible slots, and personal commitments, with explicit timings.
-        5. Grade Targets: A new section outlining specific grade requirements for passing subjects.
+        5. Grade Targets: A new section outlining specific grade requirements for passing subjects, now in a clean table format.
     -->
     <!-- VISUALIZATION CHOICES:
         - KPIs: Single Big Number (large text for countdowns) for each commitment, arranged in a grid - Goal: Inform.
         - Timeline: Custom HTML/CSS with Tailwind (structured list with visual dots and dynamic countdowns) - Goal: Change (over time), Organize.
         - Weekly Planner: HTML Table-like structure with Tailwind (grid layout for days, list for hours) - Goal: Organize.
-        - Grade Targets: Simple HTML list or table with Tailwind styling - Goal: Inform, Organize.
+        - Grade Targets: HTML table with custom styling for clear columns - Goal: Inform, Organize.
         - NO Chart.js or Plotly.js charts used as per user request.
     -->
     <!-- Chosen Palette: Energetic & Playful (#003f5c, #374c80, #7a5195, #bc5090, #ef5675, #ff764a, #ffa600) -->
@@ -192,33 +224,48 @@
         <section id="grade-targets" class="mb-12">
             <h2 class="text-2xl font-bold text-center mb-6">Suas Metas de Notas</h2>
             <p class="text-center text-gray-600 mb-6">Saiba o que você precisa alcançar em cada matéria para ter sucesso.</p>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <ul class="space-y-4 text-lg">
-                    <li class="p-3 rounded-lg bg-gray-50 flex items-center">
-                        <span class="font-semibold text-gray-700 w-24">SOP:</span>
-                        <span>Precisa de 8.2 ou mais na Prova 3.</span>
-                    </li>
-                    <li class="p-3 rounded-lg bg-gray-50 flex items-center">
-                        <span class="font-semibold text-gray-700 w-24">PIM:</span>
-                        <span>Precisa de 7.0 ou mais.</span>
-                    </li>
-                    <li class="p-3 rounded-lg bg-gray-50 flex items-center">
-                        <span class="font-semibold text-gray-700 w-24">CGR:</span>
-                        <span>Média atual 3.5. Precisa de mais 3.5 pontos. Prova Final peso 0.3, Trabalho Final peso 0.2. Um 7.0 ou 8.0 na prova final pode aliviar o trabalho.</span>
-                    </li>
-                    <li class="p-3 rounded-lg bg-gray-50 flex items-center">
-                        <span class="font-semibold text-gray-700 w-24">BAN:</span>
-                        <span>Se tirar 10.0 no Projeto Fase 2, precisa de 2.6 no EXAME.</span>
-                    </li>
-                    <li class="p-3 rounded-lg bg-gray-50 flex items-center">
-                        <span class="font-semibold text-gray-700 w-24">CAL:</span>
-                        <span>Precisa de 9.0 ou mais no Trabalho Final.</span>
-                    </li>
-                    <li class="p-3 rounded-lg bg-gray-50 flex items-center">
-                        <span class="font-semibold text-gray-700 w-24">IHC:</span>
-                        <span>Precisa de 7.0 ou mais no Artigo.</span>
-                    </li>
-                </ul>
+            <div class="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+                <table class="grade-table w-full">
+                    <thead>
+                        <tr>
+                            <th class="py-2">Descrição</th>
+                            <th class="py-2">Nota Objetivo</th>
+                            <th class="py-2">Observação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2">Prova 3 de SOP</td>
+                            <td class="py-2">8.2+</td>
+                            <td class="py-2"></td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Nota Geral de PIM</td>
+                            <td class="py-2">7.0+</td>
+                            <td class="py-2"></td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Nota para CGR</td>
+                            <td class="py-2">3.5+ pontos</td>
+                            <td class="py-2">Média atual 3.5. Prova Final peso 0.3, Trabalho Final peso 0.2. Meta: 7.0-8.0 na prova final.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">EXAME de BAN</td>
+                            <td class="py-2">2.6</td>
+                            <td class="py-2">Se tirar 10.0 no Projeto Fase 2.</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Trabalho Final de CAL</td>
+                            <td class="py-2">9.0+</td>
+                            <td class="py-2"></td>
+                        </tr>
+                        <tr>
+                            <td class="py-2">Artigo de IHC</td>
+                            <td class="py-2">7.0+</td>
+                            <td class="py-2"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </section>
 
@@ -254,11 +301,10 @@
                                     <li class="bg-red-100 p-2 rounded">8:20 - 10:10 | SOP (Aula)</li>
                                     <li class="bg-blue-100 p-2 rounded">10:10 - 11:50 | CGR (Aula)</li>
                                     <li class="bg-gray-100 p-2 rounded">12:00 - 13:30 | Almoço</li>
-                                    <li class="bg-blue-100 p-2 rounded">13:30 - 15:10 | CGR (Trabalhos Complementares)</li>
-                                    <li class="bg-purple-100 p-2 rounded">15:10 - 17:00 | Trabalho</li>
-                                    <li class="bg-pink-100 p-2 rounded">17:00 - 19:00 | BAN (Trabalho)</li>
-                                    <li class="bg-gray-100 p-2 rounded">19:00 - 20:30 | Descanso</li>
-                                    <li class="bg-gray-100 p-2 rounded">20:30 - 21:00 | Descanso</li>
+                                    <li class="bg-purple-100 p-2 rounded">13:30 - 15:10 | Trabalho (CAL)</li>
+                                    <li class="bg-orange-100 p-2 rounded">15:10 - 17:00 | PIM (Estudo)</li>
+                                    <li class="bg-gray-100 p-2 rounded">17:00 - 20:30 | Descanso e Janta</li>
+                                    <li class="bg-orange-100 p-2 rounded">20:30 - 21:00 | PIM (Revisão)</li>
                                     <li class="bg-purple-100 p-2 rounded">21:00 - 23:00 | Trabalho (Flexível)</li>
                                 </ul>
                             </div>
